@@ -1,56 +1,54 @@
-Algoritmo BoletinAcademico
-    Definir parcial1, parcial2, tpIntegrador, asistencia, promedioPonderado Como Real
-    Definir notaMax, notaMin Como Real
-    Definir condicion Como Cadena
+Algoritmo CotizacionHardware
+    // Definición de variables
+    Definir cantPlacas, cantProcesadores, cantRAM, cantTotal Como Entero
+    Definir precioPlaca, precioProce, precioRAM Como Real
+    Definir subtotalBruto, descuento, baseImponible, iva, iibb, totalFinal Como Real
     
-    Escribir "=== BOLETÍN ACADÉMICO ==="
-    Escribir "Ingrese nota del Parcial 1:"
-    Leer parcial1
-    Escribir "Ingrese nota del Parcial 2:"
-    Leer parcial2
-    Escribir "Ingrese nota del TP Integrador:"
-    Leer tpIntegrador
-    Escribir "Ingrese porcentaje de asistencia (0 a 100):"
-    Leer asistencia
+    // Entrada de datos
+    Escribir "=== COTIZADOR DE HARDWARE ==="
+    Escribir "Ingrese precio unitario de Placas Madre:"
+    Leer precioPlaca
+    Escribir "Ingrese cantidad de Placas Madre:"
+    Leer cantPlacas
     
-    // Promedio ponderado
-    promedioPonderado <- (parcial1 * 0.30) + (parcial2 * 0.30) + (tpIntegrador * 0.40)
+    Escribir "Ingrese precio unitario de Procesadores:"
+    Leer precioProce
+    Escribir "Ingrese cantidad de Procesadores:"
+    Leer cantProcesadores
     
-    // Máximos y mínimos
-    notaMax <- parcial1
-    Si parcial2 > notaMax Entonces notaMax <- parcial2 
-	FinSi
-
-    Si tpIntegrador > notaMax Entonces notaMax <- tpIntegrador 
-	FinSi
-
+    Escribir "Ingrese precio unitario de Memorias RAM:"
+    Leer precioRAM
+    Escribir "Ingrese cantidad de Memorias RAM:"
+    Leer cantRAM
     
-    notaMin <- parcial1
-    Si parcial2 < notaMin Entonces notaMin <- parcial2 
-	FinSi
-
-    Si tpIntegrador < notaMin Entonces notaMin <- tpIntegrador
-	FinSi
+    // Procesamiento
+    subtotalBruto <- (precioPlaca * cantPlacas) + (precioProce * cantProcesadores) + (precioRAM * cantRAM)
+    cantTotal <- cantPlacas + cantProcesadores + cantRAM
     
-    // Determinar condición
-    Si promedioPonderado >= 7 Y asistencia >= 75 Entonces
-        condicion <- "Promocionado"
+    // Descuento comercial si supera 10 unidades
+    Si cantTotal > 10 Entonces
+        descuento <- subtotalBruto * 0.05
     Sino
-        Si promedioPonderado >= 4 Y asistencia >= 60 Entonces
-            condicion <- "Regular"
-        Sino
-            condicion <- "Libre"
-        FinSi
+        descuento <- 0
     FinSi
     
-    // Salida
+    baseImponible <- subtotalBruto - descuento
+    iva <- baseImponible * 0.21
+    iibb <- (baseImponible + iva) * 0.025
+    totalFinal <- baseImponible + iva + iibb
+    
+    // Salida de resultados
     Escribir " "
-    Escribir "------------ RESULTADO ACADÉMICO ------------"
-    Escribir "Nota Máxima:         ", notaMax
-    Escribir "Nota Mínima:         ", notaMin
-    Escribir "Promedio Ponderado:  ", promedioPonderado
-    Escribir "Asistencia:          ", asistencia, "%"
-    Escribir "Condición Final:     ", condicion
-    Escribir "--------------------------------------------"
+    Escribir "--------------------------------------"
+    Escribir "        COMPROBANTE DE COMPRA         "
+    Escribir "--------------------------------------"
+    Escribir "Subtotal Bruto:     $", subtotalBruto
+    Escribir "Descuento (5%):    -$", descuento
+    Escribir "Base Imponible:     $", baseImponible
+    Escribir "IVA (21%):         +$", iva
+    Escribir "Percepción IIBB:   +$", iibb
+    Escribir "--------------------------------------"
+    Escribir "TOTAL A PAGAR:      $", totalFinal
+    Escribir "--------------------------------------"
 FinAlgoritmo
 
